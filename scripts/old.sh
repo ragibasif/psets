@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# File: new.sh
+# File: old.sh
 # Author: Ragib Asif
 # Email: ragib.asif30@myhunter.cuny.edu
 # GitHub: https://github.com/ragibasif
@@ -12,22 +12,13 @@ set -Ceuvx
 
 # set -n # debugging
 
-# gum: https://github.com/charmbracelet/gum
-if ! command -v gum >/dev/null 2>&1; then
-    echo "This script requires gum but gum is not installed. Aborting." >&2
-    exit 1
-fi
+# Usage: ./new.sh [platform] [problem_id] [difficulty/contest] [problem_name] [language]
 
-echo "Which platform?"
-PLATFORM=$(gum choose codeforces leetcode cses aoc usaco)
-echo "What is the problem ID?"
-PROBLEM_ID=$(gum input --placeholder "1823A (CF), 1 (LeetCode), etc.")
-echo "What is the difficulty/contest?"
-CONTEST_OR_DIFF=$(gum input --placeholder "1800-1999 (CF), easy (LeetCode), etc.")
-echo "What is the problem name?"
-PROBLEM_NAME=$(gum input --placeholder "vanya_and_fence (CF), two_sum (LeetCode), etc.")
-echo "What programming language is used to solve?"
-LANGUAGE=$(gum choose cpp py)
+PLATFORM=$1        # e.g., "codeforces", "leetcode"
+PROBLEM_ID=$2      # e.g., "1823A", "two_sum"
+CONTEST_OR_DIFF=$3 # e.g., "1800-1999" (CF) or "easy" (LeetCode)
+PROBLEM_NAME=$4    # e.g., "characteristic" (optional)
+LANGUAGE=$5        # e.g., "py" or "cpp" (programming language)
 
 # Define paths
 PLATFORM_DIR="./${PLATFORM}"
@@ -61,7 +52,7 @@ EOF
 else
     cat >"$FILE_PATH" <<EOF
 /*
- * File: main.cpp
+ * File: ${PROBLEM_ID}_${PROBLEM_NAME}.${LANGUAGE}
  * Author: Ragib Asif
  * Email: ragib.asif30@myhunter.cuny.edu
  * GitHub: https://github.com/ragibasif
@@ -70,7 +61,7 @@ else
  * Copyright (c) 2025 Ragib Asif
  * Version 1.0.0
  *
- * Problem: ${PROBLEM_ID} - ${PROBLEM_NAME}
+ * Problem: ${PROBLEM_ID} ${PROBLEM_NAME}
  * Platform: ${PLATFORM}
  * Contest/Difficulty: ${CONTEST_OR_DIFF}
  */
