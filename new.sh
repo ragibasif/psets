@@ -86,6 +86,19 @@ codeforces() {
     URL=$(gum input)
 }
 
+cses() {
+    echo "What is the category?"
+    DIFFICULTY=$(gum choose "introductory" "sorting_and_searching" "dynamic_programming" "graph_algorithms" "range_queries" "tree_algorithms" "mathematics" "string_algorithms" "geometry" "advanced_techniques" "sliding_window" "interactive" "bitwise_operations" "construction" "advanced_graph" "counting" "additional_1" "additional_2")
+    echo "What is the problem ID?"
+    PROBLEM_ID=$(gum input --placeholder "1068, 1083, 1069, 1094, etc.")
+    echo "What is the problem name?"
+    PROBLEM_NAME=$(gum input --placeholder "weird_algorithm, missing_number, repetitions, two_sets, etc.")
+    echo "What is the programming language used?"
+    LANGUAGE=$(gum choose cpp py)
+    echo "What is the problem URL?"
+    URL=$(gum input)
+}
+
 platform() {
     echo "What is the platform?"
     PLATFORM=$(gum choose testing aoc codeforces cses leetcode usaco)
@@ -98,6 +111,9 @@ platform() {
         ;;
     "codeforces")
         codeforces
+        ;;
+    "cses")
+        cses
         ;;
     *)
         gum log --time kitchen --structured --level error "Platform is not supported." name "$PLATFORM"
@@ -170,7 +186,7 @@ file() {
 
 welcome() {
     gum log --time kitchen --structured --level info "Initializing script..." name "$FILE"
-    gum spin --spinner dot --title "Running script..." -- sleep 2
+    gum spin --spinner dot --title "Running script..." -- sleep 1
     gum style \
         --foreground 212 --border-foreground 212 --border double \
         --align center --width 50 --margin "1 2" --padding "2 4" \
@@ -184,10 +200,11 @@ main() {
     path
     file
 
-    gum spin --spinner dot --title "Creating $FILE_PATH" -- sleep 2
+    gum spin --spinner dot --title "Creating $FILE_PATH" -- sleep 1
 
     echo "$SUCCESS $CYAN$FILE_PATH$RESET is created!"
     $EDITOR "$FILE_PATH"
+    cd "$FILE_PATH" || return
 }
 
 main

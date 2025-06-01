@@ -1,3 +1,18 @@
+/*
+ * File: main.cpp
+ * Author: Ragib Asif
+ * Email: ragib.asif30@myhunter.cuny.edu
+ * GitHub: https://github.com/ragibasif
+ * LinkedIn: https://www.linkedin.com/in/ragibasif/
+ * SPDX-License-Identifier: MIT
+ * Copyright (c) 2025 Ragib Asif
+ * Version 1.0.0
+ *
+ * Problem: 1068 - weird_algorithm
+ * Platform: cses
+ * Difficulty: introductory
+ * URL: https://cses.fi/problemset/task/1068
+ */
 
 /******************************************************************************/
 /*                                  INCLUDES                                  */
@@ -68,7 +83,18 @@ int solve(void) {
     if (!(cin >> n)) {
         return EXIT_FAILURE;
     }
-    cout << n << '\n';
+    cout << n << " ";
+    while (n != 1) {
+        if (n % 2 == 0) {
+            n /= 2;
+        } else {
+            n *= 3;
+            n++;
+        }
+        cout << n << " ";
+    }
+    cout << endl;
+
     return EXIT_SUCCESS;
 } // solve
 
@@ -88,8 +114,8 @@ int main(void) {
 #endif // USACO
 
     int t;
-    // t = 1;
-    cin >> t; // Uncomment for multiple test cases
+    t = 1;
+    // cin >> t; // Uncomment for multiple test cases
     for (int i = 0; i < t; i++) {
         if (solve()) {
             break;
