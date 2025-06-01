@@ -87,7 +87,7 @@ codeforces() {
 }
 
 cses() {
-    echo "What is the category?"
+    echo "What is the difficulty?"
     DIFFICULTY=$(gum choose "introductory" "sorting_and_searching" "dynamic_programming" "graph_algorithms" "range_queries" "tree_algorithms" "mathematics" "string_algorithms" "geometry" "advanced_techniques" "sliding_window" "interactive" "bitwise_operations" "construction" "advanced_graph" "counting" "additional_1" "additional_2")
     echo "What is the problem ID?"
     PROBLEM_ID=$(gum input --placeholder "1068, 1083, 1069, 1094, etc.")
@@ -195,10 +195,14 @@ welcome() {
 }
 
 final() {
-    $EDITOR "$FILE_PATH"
     if [ "$PLATFORM" = "leetcode" ]; then
+        $EDITOR "$FILE_PATH"
         return
     fi
+    if [ "$PLATFORM" = "testing" ]; then
+        return
+    fi
+    $EDITOR "$FILE_PATH"
     cd "$FILE_DIR" || return
 }
 
