@@ -194,17 +194,28 @@ welcome() {
 
 }
 
+final() {
+    $EDITOR "$FILE_PATH"
+    if [ "$PLATFORM" = "leetcode" ]; then
+        return
+    fi
+    cd "$FILE_DIR" || return
+}
+
 main() {
     welcome
+
     platform
+
     path
+
     file
 
     gum spin --spinner dot --title "Creating $FILE_PATH" -- sleep 1
 
     echo "$SUCCESS $CYAN$FILE_PATH$RESET is created!"
-    $EDITOR "$FILE_PATH"
-    cd "$FILE_PATH" || return
+
+    final
 }
 
 main
