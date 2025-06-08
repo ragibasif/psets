@@ -39,6 +39,10 @@ DIFFICULTY=""
 LANGUAGE=""
 URL=""
 
+#Codepath specific
+UNIT=""
+SESSION=""
+
 PLATFORM_DIR=""
 CATEGORY_DIR=""
 FILE_DIR=""
@@ -99,9 +103,22 @@ cses() {
     URL=$(gum input)
 }
 
+codepath() {
+    echo "What is the difficulty?"
+    DIFFICULTY=$(gum choose "standard" "advanced")
+    echo "What is the problem ID?"
+    PROBLEM_ID=$(gum choose "a" "b")
+    echo "What is the problem name?"
+    PROBLEM_NAME=$(gum input --placeholder "weird_algorithm, missing_number, repetitions, two_sets, etc.")
+    echo "What is the programming language used?"
+    LANGUAGE=$(gum choose cpp py)
+    echo "What is the problem URL?"
+    URL=$(gum input)
+}
+
 platform() {
     echo "What is the platform?"
-    PLATFORM=$(gum choose testing aoc codeforces cses leetcode usaco)
+    PLATFORM=$(gum choose testing aoc codeforces cses leetcode usaco codepath)
     case "$PLATFORM" in
     "testing")
         testing
@@ -115,6 +132,9 @@ platform() {
     "cses")
         cses
         ;;
+    "codepath")
+        codepath
+        ;;
     *)
         gum log --time kitchen --structured --level error "Platform is not supported." name "$PLATFORM"
         exit 1
@@ -125,7 +145,15 @@ platform() {
 # Define paths
 path() {
     PLATFORM_DIR="./${PLATFORM}"
-    CATEGORY_DIR="${PLATFORM_DIR}/${DIFFICULTY}"
+    if [ "$PLATFORM" = "codepath" ]; then
+        echo "Which unit?"
+        UNIT=$(gum choose "unit1" "unit2" "unit3" "unit4" "unit5" "unit6" "unit7" "unit8" "unit9")
+        echo "Which session?"
+        SESSION=$(gum choose "session1" "session2")
+        CATEGORY_DIR="${PLATFORM_DIR}/${UNIT}/${SESSION}/${DIFFICULTY}"
+    else
+        CATEGORY_DIR="${PLATFORM_DIR}/${DIFFICULTY}"
+    fi
     FILE_DIR="${CATEGORY_DIR}/${PROBLEM_ID}_${PROBLEM_NAME}/${LANGUAGE}"
     FILE_PATH="${FILE_DIR}/main.${LANGUAGE}"
     if [ -e "$FILE_PATH" ]; then
