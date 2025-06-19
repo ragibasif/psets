@@ -32,6 +32,8 @@ using namespace std;
 /*                                   INPUT                                    */
 /******************************************************************************/
 
+#include "dbg.h" // comment out before submitting
+
 #define FAST_IO                                                                \
     ios_base::sync_with_stdio(false);                                          \
     cin.tie(NULL);                                                             \
