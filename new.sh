@@ -156,14 +156,14 @@ EOF
 }
 
 # Generate python file with template and metadata
-python() {
+py() {
     echo "\"\"\"" >>"$FILE_PATH"
     metadata
     echo "\"\"\"" >>"$FILE_PATH"
 }
 
 # Generate C++ file with template and metadata
-cplusplus() {
+cpp() {
     echo "/*" >>"$FILE_PATH"
     metadata
     echo "*/" >>"$FILE_PATH"
@@ -173,9 +173,9 @@ file() {
     mkdir -p "$FILE_DIR"
     touch "$FILE_PATH"
     if [ "$LANGUAGE" = "py" ]; then
-        python
+        py
     else
-        cplusplus
+        cpp
     fi
     if [ "$PLATFORM" = "leetcode" ]; then
         return

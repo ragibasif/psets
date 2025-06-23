@@ -1,3 +1,18 @@
+/*
+ * File: main.cpp
+ * Author: Ragib Asif
+ * Email: ragib.asif30@myhunter.cuny.edu
+ * GitHub: https://github.com/ragibasif
+ * LinkedIn: https://www.linkedin.com/in/ragibasif/
+ * SPDX-License-Identifier: MIT
+ * Copyright (c) 2025 Ragib Asif
+ * Version 1.0.0
+ *
+ * Problem: 1069 - repetitions
+ * Platform: cses
+ * Difficulty: introductory
+ * URL: https://cses.fi/problemset/task/1069
+ */
 
 /******************************************************************************/
 /*                                  INCLUDES                                  */
@@ -66,11 +81,33 @@ const double PI = acos(-1.0);
 
 int solve(void) {
 
-    long long int n;
-    if (!(cin >> n)) {
-        return EXIT_FAILURE;
+    string str;
+    cin >> str;
+    size_t n = str.size();
+    unsigned long long int max_ = 0;
+    unsigned long long int curr_max = 0;
+    char prev = '\0';
+
+    for (size_t i = 0; i < n; i++) {
+        if (!prev) {
+            curr_max = 1;
+            max_ = max(max_, curr_max);
+        } else {
+            if (prev == str[i]) {
+                curr_max++;
+                max_ = max(max_, curr_max);
+            } else {
+                curr_max = 1;
+                max_ = max(max_, curr_max);
+            }
+        }
+        prev = str[i];
     }
-    cout << n << '\n';
+    if (curr_max < 1) {
+        max_ = 1;
+    }
+
+    cout << max_ << '\n';
     return EXIT_SUCCESS;
 } // solve
 
@@ -90,8 +127,8 @@ int main(void) {
 #endif // USACO
 
     int t;
-    // t = 1;
-    cin >> t; // Uncomment for multiple test cases
+    t = 1;
+    // cin >> t; // Uncomment for multiple test cases
     for (int i = 0; i < t; i++) {
         if (solve()) {
             break;
