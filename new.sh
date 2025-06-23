@@ -202,8 +202,8 @@ final() {
     if [ "$PLATFORM" = "testing" ]; then
         return
     fi
-    $EDITOR "$FILE_PATH"
     cd "$FILE_DIR" || return
+    $EDITOR "$FILE_PATH"
 }
 
 main() {
