@@ -47,19 +47,6 @@ TEMPLATE_DIR=""
 TEMPLATE_FILE=""
 TEMPLATE_BUILD=""
 
-testing() {
-    echo "What is the difficulty?"
-    DIFFICULTY=$(gum choose t1 t2 t3 t4)
-    echo "What is the problem ID?"
-    PROBLEM_ID=$(gum input --placeholder "0001, 0173, 1129, etc.")
-    echo "What is the problem name?"
-    PROBLEM_NAME=$(gum input --placeholder "test1, test2, test3, etc.")
-    echo "What is the programming language used?"
-    LANGUAGE=$(gum choose cpp py)
-    echo "What is the problem URL?"
-    URL=$(gum input)
-}
-
 leetcode() {
     echo "What is the difficulty?"
     DIFFICULTY=$(gum choose easy medium hard)
@@ -101,11 +88,8 @@ cses() {
 
 platform() {
     echo "What is the platform?"
-    PLATFORM=$(gum choose testing aoc codeforces cses leetcode usaco)
+    PLATFORM=$(gum choose codeforces cses leetcode usaco)
     case "$PLATFORM" in
-    "testing")
-        testing
-        ;;
     "leetcode")
         leetcode
         ;;
@@ -124,7 +108,7 @@ platform() {
 
 # Define paths
 path() {
-    PLATFORM_DIR="./${PLATFORM}"
+    PLATFORM_DIR="$PWD/${PLATFORM}"
     CATEGORY_DIR="${PLATFORM_DIR}/${DIFFICULTY}"
     FILE_DIR="${CATEGORY_DIR}/${PROBLEM_ID}_${PROBLEM_NAME}/${LANGUAGE}"
     FILE_PATH="${FILE_DIR}/main.${LANGUAGE}"
@@ -132,7 +116,7 @@ path() {
         gum log --time kitchen --structured --level error "File path already exists." name "$FILE_PATH"
         exit 1
     fi
-    TEMPLATE_DIR="./template.${LANGUAGE}"
+    TEMPLATE_DIR="$PWD/template.${LANGUAGE}"
     TEMPLATE_FILE="${TEMPLATE_DIR}/main.${LANGUAGE}"
     TEMPLATE_BUILD="${TEMPLATE_DIR}/Makefile"
 }
@@ -195,15 +179,7 @@ welcome() {
 }
 
 final() {
-    if [ "$PLATFORM" = "leetcode" ]; then
-        $EDITOR "$FILE_PATH"
-        return
-    fi
-    if [ "$PLATFORM" = "testing" ]; then
-        return
-    fi
     $EDITOR "$FILE_PATH"
-    cd "$FILE_DIR" || return
 }
 
 main() {
