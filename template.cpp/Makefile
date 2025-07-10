@@ -1,10 +1,11 @@
-CXX=clang++
-CXXFLAGS=-std=c++17 -Wall -Wextra
+CXX:=g++
+CXXFLAGS:=-std=c++17 -Wall -Wextra
+SRC:=main.cpp
 
-EXECUTABLE=exe
+EXECUTABLE:=exe
 
 all:
-	$(CXX) -o $(EXECUTABLE) main.cpp $(CXXFLAGS)
+	$(CXX) -o $(EXECUTABLE) $(SRC) $(CXXFLAGS)
 
 clean:
 	$(RM) $(EXECUTABLE)

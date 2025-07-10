@@ -32,8 +32,6 @@ using namespace std;
 /*                                   INPUT                                    */
 /******************************************************************************/
 
-// #include "dbg.h" // comment out before submitting
-
 #define FAST_IO                                                                \
     ios_base::sync_with_stdio(false);                                          \
     cin.tie(NULL);                                                             \
@@ -88,7 +86,6 @@ int main(void) {
 #ifdef USACO
     USACO_IO("problem");
 #endif // USACO
-
     int t;
     // t = 1;
     cin >> t; // Uncomment for multiple test cases
