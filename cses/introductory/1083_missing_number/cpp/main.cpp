@@ -1,7 +1,6 @@
 /*
  * File: main.cpp
  * Author: Ragib Asif
- * Email: ragib.asif30@myhunter.cuny.edu
  * GitHub: https://github.com/ragibasif
  * LinkedIn: https://www.linkedin.com/in/ragibasif/
  * SPDX-License-Identifier: MIT

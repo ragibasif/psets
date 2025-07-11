@@ -1,7 +1,6 @@
 /*
  * File: main.cpp
  * Author: Ragib Asif
- * Email: ragib.asif30@myhunter.cuny.edu
  * GitHub: https://github.com/ragibasif
  * LinkedIn: https://www.linkedin.com/in/ragibasif/
  * SPDX-License-Identifier: MIT
@@ -102,7 +101,7 @@ int solve(void) {
 /*                    01101101 01100001 01101001 01101110                     */
 /******************************************************************************/
 
-int main(void) {
+int main() {
     FAST_IO;
 
 #ifdef LOCAL
