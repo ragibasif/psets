@@ -141,14 +141,12 @@ metadata() {
 EOF
 }
 
-# Generate python file with template and metadata
 py() {
     echo "\"\"\"" >>"$FILE_PATH"
     metadata
     echo "\"\"\"" >>"$FILE_PATH"
 }
 
-# Generate C++ file with template and metadata
 cpp() {
     echo "/*" >>"$FILE_PATH"
     metadata

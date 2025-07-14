@@ -24,3 +24,40 @@
 #include <utility>       // pair
 #include <vector>        // vector - dynamic array
 ```
+
+## Power Set
+
+```c++
+vector<int> subset;
+int n = 3;
+
+void generate_subsets(int k) {
+    if (k == n + 1) {
+        for (int i = 0; i < subset.size(); i++) {
+            cout << subset[i] << " ";
+        }
+        cout << "\n";
+    } else {
+        // include k in the subset
+        subset.push_back(k);
+        generate_subsets(k + 1);
+        subset.pop_back();
+        // dont include k in the subset
+        generate_subsets(k + 1);
+    }
+}
+
+generate_subsets(1);
+
+```
+
+```sh
+1 2 3
+1 2
+1 3
+1
+2 3
+2
+3
+{}
+```
