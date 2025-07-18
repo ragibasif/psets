@@ -4,28 +4,28 @@
 // INCLUDES
 /*----------------------------------------------------------------------------*/
 
-// #include <algorithm>
-// #include <bitset>
-// #include <cassert>
-// #include <chrono>
-// #include <climits>
-// #include <cmath>
-// #include <cstdint>
-// #include <functional>
+#include <algorithm>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <climits>
+#include <cmath>
+#include <cstdint>
+#include <functional>
 #include <iostream>
-// #include <iterator>
-// #include <map>
-// #include <numeric>
-// #include <queue>
-// #include <random>
-// #include <set>
-// #include <stack>
-// #include <string>
-// #include <tuple>
-// #include <unordered_map>
-// #include <unordered_set>
-// #include <utility>
-// #include <vector>
+#include <iterator>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <stack>
+#include <string>
+#include <tuple>
+#include <unordered_map>
+#include <unordered_set>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -33,26 +33,73 @@ using namespace std;
 // FILE INPUT/OUTPUT
 /*----------------------------------------------------------------------------*/
 
-// #define USACO_IO(s)                                                            \
-//     do {                                                                       \
-//         freopen(((s) + ".in").c_str(), "r", stdin);                            \
-//         freopen(((s) + ".out").c_str(), "w", stdout);                          \
-//     } while (0)
-//
-// #define LOCAL_IO \
-//     do { \
-//         freopen("input.txt", "r", stdin); \
-//         freopen("output.txt", "w", stdout); \
-//     } while (0)
+#define IO(NAME)                                                               \
+    do {                                                                       \
+        cin.tie(0)->sync_with_stdio(0);                                        \
+        if (fopen(NAME ".in", "r")) {                                          \
+            freopen(NAME ".in", "r", stdin);                                   \
+            freopen(NAME ".out", "w", stdout);                                 \
+        }                                                                      \
+    } while (0)
 
 /*----------------------------------------------------------------------------*/
 // CONSTANTS
 /*----------------------------------------------------------------------------*/
 
-// const int MOD = 1e9 + 7;
-// const int INF = 1e9;
-// const long long int LLINF = 4e18;
-// const double PI = acos(-1.0);
+const int           MOD   = 1e9 + 7;
+const int           INF   = 1e9;
+const long long int LLINF = 4e18;
+const double        PI    = acos(-1.0);
+const int           dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+
+/*----------------------------------------------------------------------------*/
+// Debugging Helpers
+/*----------------------------------------------------------------------------*/
+
+template <typename T> void dbg(const T &n) { cerr << n << endl; }
+
+template <typename T1, typename T2> void dbg(const pair<T1, T2> &n) {
+    cerr << "pair = [" << n.first << ", " << n.second << "]" << endl;
+}
+
+template <typename T> void dbg(const vector<T> &n) {
+    cerr << "vector = [" << endl;
+    bool first = true;
+    for (const auto &x : n) {
+        if (!first) {
+            cerr << ", " << endl;
+        }
+        cerr << "    " << x;
+        first = false;
+    }
+    cerr << endl << "]" << endl;
+}
+
+template <typename T> void dbg(const unordered_set<T> &n) {
+    cerr << "unordered_set = {" << endl;
+    bool first = true;
+    for (const auto &x : n) {
+        if (!first) {
+            cerr << ", " << endl;
+        }
+        cerr << "    " << x;
+        first = false;
+    }
+    cerr << endl << "}" << endl;
+}
+
+template <typename T1, typename T2> void dbg(const unordered_map<T1, T2> &n) {
+    cerr << "unordered_map = {" << endl;
+    bool first = true;
+    for (const auto &x : n) {
+        if (!first) {
+            cerr << ", " << endl;
+        }
+        cerr << "    [" << x.first << ", " << x.second << "]";
+        first = false;
+    }
+    cerr << endl << "}" << endl;
+}
 
 /*----------------------------------------------------------------------------*/
 // SOLVE
@@ -77,13 +124,6 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
 
-    // #ifdef LOCAL
-    //     LOCAL_IO;
-    // #endif // LOCAL
-
-    // #ifdef USACO
-    //     USACO_IO("problem");
-    // #endif // USACO
     int t;
     t = 1;
     // cin >> t; // Uncomment for multiple test cases
