@@ -1,4 +1,17 @@
-
+/*
+ * File: main.cpp
+ * Author: Ragib Asif
+ * GitHub: https://github.com/ragibasif
+ * LinkedIn: https://www.linkedin.com/in/ragibasif/
+ * SPDX-License-Identifier: MIT
+ * Copyright (c) 2025 Ragib Asif
+ * Version 1.0.0
+ *
+ * Problem: 1092 - two_sets
+ * Platform: cses
+ * Difficulty: introductory
+ * URL: https://cses.fi/problemset/task/1092
+ */
 
 /*----------------------------------------------------------------------------*/
 // INCLUDES
@@ -25,7 +38,7 @@
 // #include <unordered_map>
 // #include <unordered_set>
 // #include <utility>
-// #include <vector>
+#include <vector>
 
 using namespace std;
 
@@ -64,6 +77,42 @@ int solve(void) {
     if (!(cin >> n)) {
         return EXIT_FAILURE;
     }
+    long long int sum = (n * (n + 1)) / 2;
+    if (n < 1 || sum % 2 != 0) {
+        cout << "NO" << endl;
+        return EXIT_SUCCESS;
+    }
+
+    long long int         sum_1 = 0;
+    long long int         sum_2 = 0;
+    vector<long long int> v1    = {};
+    vector<long long int> v2    = {};
+
+    for (int i = n; i > 0; i--) {
+        if (sum_1 <= sum_2) {
+            v1.push_back(i);
+            sum_1 += i;
+        } else {
+            v2.push_back(i);
+            sum_2 += i;
+        }
+    }
+
+    if (sum_1 + sum_2 != sum) {
+        cout << "NO" << endl;
+        return EXIT_SUCCESS;
+    }
+
+    cout << "YES" << endl;
+    cout << v1.size() << "\n";
+    for (int i = 0; i < v1.size(); i++) {
+        cout << v1[i] << " ";
+    }
+    cout << "\n" << v2.size() << "\n";
+    for (int i = 0; i < v2.size(); i++) {
+        cout << v2[i] << " ";
+    }
+    cout << "\n";
 
     return EXIT_SUCCESS;
 } // solve
@@ -77,13 +126,13 @@ int main(void) {
     cin.tie(NULL);
     cout.tie(NULL);
 
-    // #ifdef LOCAL
-    //     LOCAL_IO;
-    // #endif // LOCAL
+#ifdef LOCAL
+    LOCAL_IO;
+#endif // LOCAL
 
-    // #ifdef USACO
-    //     USACO_IO("problem");
-    // #endif // USACO
+#ifdef USACO
+    USACO_IO("problem");
+#endif // USACO
     int t;
     t = 1;
     // cin >> t; // Uncomment for multiple test cases
