@@ -110,14 +110,17 @@ eval_platform() {
     esac
 }
 
+edit_file() {
+    $EDITOR "$FILE_PATH"
+}
+
 create_path() {
     PLATFORM_DIR="$PWD/${PLATFORM}"
     CATEGORY_DIR="${PLATFORM_DIR}/${DIFFICULTY}"
     FILE_DIR="${CATEGORY_DIR}/${PROBLEM_ID}_${PROBLEM_NAME}/${LANGUAGE}"
     FILE_PATH="${FILE_DIR}/main.${LANGUAGE}"
     if [ -e "$FILE_PATH" ]; then
-        gum log --time kitchen --structured --level error "File path already exists." name "$FILE_PATH"
-        exit 1
+        edit_file
     fi
     TEMPLATE_DIR="$PWD/template.${LANGUAGE}"
     TEMPLATE_FILE="${TEMPLATE_DIR}/main.${LANGUAGE}"
@@ -169,10 +172,6 @@ create_file() {
 
     gum spin --spinner dot --title "Creating $FILE_PATH" -- sleep 1
     echo "$SUCCESS $CYAN$FILE_PATH$RESET is created!"
-}
-
-edit_file() {
-    $EDITOR "$FILE_PATH"
 }
 
 main() {
