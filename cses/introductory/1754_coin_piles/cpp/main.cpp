@@ -46,14 +46,14 @@ using namespace std;
 // FILE INPUT/OUTPUT
 /*----------------------------------------------------------------------------*/
 
-#define IO(NAME)                                                               \
+#define IO( NAME )                                                             \
     do {                                                                       \
-        cin.tie(0)->sync_with_stdio(0);                                        \
-        if (fopen(NAME ".in", "r")) {                                          \
-            freopen(NAME ".in", "r", stdin);                                   \
-            freopen(NAME ".out", "w", stdout);                                 \
+        cin.tie( 0 )->sync_with_stdio( 0 );                                    \
+        if ( fopen( NAME ".in", "r" ) ) {                                      \
+            freopen( NAME ".in", "r", stdin );                                 \
+            freopen( NAME ".out", "w", stdout );                               \
         }                                                                      \
-    } while (0)
+    } while ( 0 )
 
 /*----------------------------------------------------------------------------*/
 // CONSTANTS
@@ -62,52 +62,53 @@ using namespace std;
 const int           MOD   = 1e9 + 7;
 const int           INF   = 1e9;
 const long long int LLINF = 4e18;
-const double        PI    = acos(-1.0);
-const int           dx[4]{1, 0, -1, 0}, dy[4]{0, 1, 0, -1};
+const double        PI    = acos( -1.0 );
+const int           dx[4]{ 1, 0, -1, 0 }, dy[4]{ 0, 1, 0, -1 };
 
 /*----------------------------------------------------------------------------*/
 // Debugging Helpers
 /*----------------------------------------------------------------------------*/
 
-template <typename T> void dbg(const T &n) { cerr << n << endl; }
+template <typename T>
+void dbg( const T &n ) {
+    cerr << n << endl;
+}
 
-template <typename T1, typename T2> void dbg(const pair<T1, T2> &n) {
+template <typename T1, typename T2>
+void dbg( const pair<T1, T2> &n ) {
     cerr << "pair = [" << n.first << ", " << n.second << "]" << endl;
 }
 
-template <typename T> void dbg(const vector<T> &n) {
+template <typename T>
+void dbg( const vector<T> &n ) {
     cerr << "vector = [" << endl;
     bool first = true;
-    for (const auto &x : n) {
-        if (!first) {
-            cerr << ", " << endl;
-        }
+    for ( const auto &x : n ) {
+        if ( !first ) { cerr << ", " << endl; }
         cerr << "    " << x;
         first = false;
     }
     cerr << endl << "]" << endl;
 }
 
-template <typename T> void dbg(const unordered_set<T> &n) {
+template <typename T>
+void dbg( const unordered_set<T> &n ) {
     cerr << "unordered_set = {" << endl;
     bool first = true;
-    for (const auto &x : n) {
-        if (!first) {
-            cerr << ", " << endl;
-        }
+    for ( const auto &x : n ) {
+        if ( !first ) { cerr << ", " << endl; }
         cerr << "    " << x;
         first = false;
     }
     cerr << endl << "}" << endl;
 }
 
-template <typename T1, typename T2> void dbg(const unordered_map<T1, T2> &n) {
+template <typename T1, typename T2>
+void dbg( const unordered_map<T1, T2> &n ) {
     cerr << "unordered_map = {" << endl;
     bool first = true;
-    for (const auto &x : n) {
-        if (!first) {
-            cerr << ", " << endl;
-        }
+    for ( const auto &x : n ) {
+        if ( !first ) { cerr << ", " << endl; }
         cerr << "    [" << x.first << ", " << x.second << "]";
         first = false;
     }
@@ -118,27 +119,34 @@ template <typename T1, typename T2> void dbg(const unordered_map<T1, T2> &n) {
 // SOLVE
 /*----------------------------------------------------------------------------*/
 
-int solve(void) {
+int solve( void ) {
 
-    unsigned long long int n;
-    if (!(cin >> n)) {
-        return EXIT_FAILURE;
-    }
-    for (unsigned long long int i = 0; i < n; i++) {
+    size_t n;
+    if ( !( cin >> n ) ) { return EXIT_FAILURE; }
+    for ( size_t i = 0; i < n; i++ ) {
         unsigned long long int a, b;
         cin >> a >> b;
-
-        if (a == 0 || b == 0) {
-            if (a == 0 && b == 0) {
-                cout << "YES\n";
-            } else {
-                cout << "NO\n";
-            }
-        } else if (((a == 2 * b) || (b == 2 * a)) && ((a + b) % 3 == 0)) {
-            cout << "YES\n";
-        } else {
+        // sum must be divisible by 3
+        if ( !( ( a + b ) % 3 == 0 ) ) {
             cout << "NO\n";
+            continue;
         }
+
+        if ( a == b ) {
+            cout << "YES\n";
+            continue;
+        }
+        // neither a nor b can be 0
+        if ( !( a > 0 && b > 0 ) ) {
+            cout << "NO\n";
+            continue;
+        }
+        if ( min( a, b ) * 2 >= max( a, b ) &&
+             max( a, b ) / 2 <= min( a, b ) ) {
+            cout << "YES\n";
+            continue;
+        }
+        cout << "NO\n";
     }
 
     return EXIT_SUCCESS;
@@ -148,18 +156,16 @@ int solve(void) {
 // MAIN
 /*----------------------------------------------------------------------------*/
 
-int main(void) {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+int main( void ) {
+    ios_base::sync_with_stdio( false );
+    cin.tie( NULL );
+    cout.tie( NULL );
 
     int t;
     t = 1;
     // cin >> t; // Uncomment for multiple test cases
-    for (int i = 0; i < t; i++) {
-        if (solve()) {
-            break;
-        }
+    for ( int i = 0; i < t; i++ ) {
+        if ( solve() ) { break; }
     }
 
     cerr << endl
