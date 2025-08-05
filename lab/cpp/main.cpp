@@ -124,6 +124,16 @@ bool odd( T n ) {
     return !even( n );
 }
 
+template <typename T>
+class Subsets {
+  private:
+    vector<T> buffer;
+
+  public:
+    Subsets( T k ) {}
+    ~Subsets() {}
+};
+
 } // namespace custom
 
 /*----------------------------------------------------------------------------*/
