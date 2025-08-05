@@ -35,6 +35,7 @@ extern void da_cleanup( struct dynamic_array *da );
 // TODO
 // resize
 // reserve
+// set
 
 #ifdef __cplusplus
 }
